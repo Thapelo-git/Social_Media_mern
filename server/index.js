@@ -17,7 +17,7 @@ import { verifyToken } from "./middleware/auth.js";
 import User from "./model/User.js"
 import {users,posts} from "./data/index.js"
 import Post from "./model/Posts.js";
-
+import validateEnv from "./util/validateEnv.js";
 // CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,8 +53,8 @@ app.use("/auth",authRoutes);
 app.use("/users",userRoutes)
 app.use("/post",postRoutes)
 // mongoose setup
-const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL,{
+const PORT = validateEnv.PORT || 6001;
+mongoose.connect(validateEnv.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
